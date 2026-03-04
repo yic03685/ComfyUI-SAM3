@@ -1,5 +1,5 @@
-comfy-env==0.2.18
-comfy-3d-viewers==0.2.32
+comfy-env==0.2.28
+comfy-3d-viewers==0.2.37
 
 # SAM3 dependencies (vendored in sam3/)
 safetensors>=0.4.0
