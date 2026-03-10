@@ -82,6 +82,7 @@ def basic_clean(text):
 
 
 def whitespace_clean(text):
+
     text = re.sub(r"\s+", " ", text)
     text = text.strip()
     return text
@@ -131,6 +132,7 @@ def canonicalize_text(text, *, keep_punctuation_exact_string=None):
     else:
         text = text.translate(str.maketrans("", "", string.punctuation))
     text = text.lower()
+
     text = re.sub(r"\s+", " ", text)
     return text.strip()
 
@@ -168,6 +170,7 @@ class SimpleTokenizer(object):
         self.decoder = {v: k for k, v in self.encoder.items()}
         self.bpe_ranks = dict(zip(merges, range(len(merges))))
         self.cache = {t: t for t in special_tokens}
+    
         special = "|".join(special_tokens)
         self.pat = re.compile(
             special + r"""|'s|'t|'re|'ve|'m|'ll|'d|[\p{L}]+|[\p{N}]|[^\s\p{L}\p{N}]+""",
@@ -222,6 +225,7 @@ class SimpleTokenizer(object):
     def encode(self, text):
         bpe_tokens = []
         text = self.clean_fn(text)
+    
         for token in re.findall(self.pat, text):
             token = "".join(self.byte_encoder[b] for b in token.encode("utf-8"))
             bpe_tokens.extend(
