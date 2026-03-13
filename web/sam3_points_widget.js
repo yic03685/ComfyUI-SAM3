@@ -44,8 +44,6 @@ app.registerExtension({
     name: "Comfy.SAM3.SimplePointCollector",
 
     async beforeRegisterNodeDef(nodeType, nodeData, app) {
-        console.log("[SAM3] beforeRegisterNodeDef called for:", nodeData.name);
-
         if (nodeData.name === "SAM3PointCollector") {
             console.log("[SAM3] Registering SAM3PointCollector node");
             const onNodeCreated = nodeType.prototype.onNodeCreated;

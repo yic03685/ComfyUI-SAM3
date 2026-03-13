@@ -657,9 +657,12 @@ class SAM3InteractiveCollector(io.ComfyNode):
     # -- main execution (workflow queue) -----------------------------------
 
     @classmethod
-    def execute(cls, sam3_model_config, image, multi_prompts_store, unique_id=None):
+    def execute(cls, sam3_model_config, image, multi_prompts_store, **kwargs):
         from ._model_cache import get_or_build_model
         import comfy.model_management
+
+        # V1 proxy passes unique_id as kwarg; V3 native uses cls.hidden
+        unique_id = kwargs.get("unique_id") or (cls.hidden.unique_id if cls.hidden else None)
 
         sam3_model = get_or_build_model(sam3_model_config)
         comfy.model_management.load_models_gpu([sam3_model])
@@ -682,7 +685,9 @@ class SAM3InteractiveCollector(io.ComfyNode):
             "state": state,
             "pil_image": pil_image,
             "img_size": (img_w, img_h),
+            "prompt_masks": {},  # keyed by prompt_index → (masks, scores)
         }
+        log.info("execute() cached node_id=%r", str(unique_id))
 
         # Parse prompts
         try:
@@ -744,29 +749,24 @@ class SAM3InteractiveCollector(io.ComfyNode):
 # Custom API route for live interactive segmentation
 # ---------------------------------------------------------------------------
 
-def _run_segment_sync(cached, raw_prompts):
-    """Blocking helper -- called from the async route via run_in_executor."""
-    sam3_model = cached["sam3_model"]  # ModelPatcher for GPU management
-    model = cached["model"]            # processor.model with predict_inst
-    state = cached["state"]
+
+
+def _build_overlay(cached):
+    """Composite all cached prompt masks into a single overlay image."""
     pil_image = cached["pil_image"]
-    img_w, img_h = cached["img_size"]
+    prompt_masks = cached["prompt_masks"]
 
-    import comfy.model_management
-    comfy.model_management.load_models_gpu([sam3_model])
+    if not prompt_masks:
+        return None
 
-    multi_prompts = SAM3InteractiveCollector._parse_raw_prompts(raw_prompts, img_w, img_h)
-    if not multi_prompts:
-        return {"error": "No valid prompts", "num_masks": 0}
-
-    all_masks, all_scores = SAM3InteractiveCollector._run_prompts(
-        model, state, multi_prompts, img_w, img_h
-    )
-    if not all_masks:
-        return {"error": "No masks generated", "num_masks": 0}
+    all_masks = []
+    all_scores = []
+    for masks, scores in prompt_masks.values():
+        all_masks.extend(masks)
+        all_scores.extend(scores)
 
     masks = torch.stack(all_masks, dim=0)
-    scores = torch.tensor(all_scores)
+    scores_t = torch.tensor(all_scores)
 
     boxes_list = []
     for i in range(masks.shape[0]):
@@ -778,22 +778,19 @@ def _run_segment_sync(cached, raw_prompts):
             boxes_list.append([0, 0, 0, 0])
     boxes = torch.tensor(boxes_list).float()
 
-    vis_image = visualize_masks_on_image(pil_image, masks, boxes, scores, alpha=0.5)
+    vis_image = visualize_masks_on_image(pil_image, masks, boxes, scores_t, alpha=0.5)
     buf = stdio.BytesIO()
     vis_image.save(buf, format="JPEG", quality=80)
-    overlay_b64 = base64.b64encode(buf.getvalue()).decode("utf-8")
-
-    return {"overlay": overlay_b64, "num_masks": len(all_masks)}
+    return base64.b64encode(buf.getvalue()).decode("utf-8")
 
 
-def _run_segment_sync_one(cached, raw_prompt, prompt_name):
-    """Run segmentation for a single named prompt. Thread-safe via _SEGMENT_LOCK."""
+def _run_segment_sync_one(cached, raw_prompt, prompt_name, prompt_index):
+    """Run segmentation for a single prompt, cache masks, return composite overlay."""
     log.info("Prompt '%s' dispatched", prompt_name)
 
     sam3_model = cached["sam3_model"]
     model = cached["model"]
     state = cached["state"]
-    pil_image = cached["pil_image"]
     img_w, img_h = cached["img_size"]
 
     import comfy.model_management
@@ -809,12 +806,17 @@ def _run_segment_sync_one(cached, raw_prompt, prompt_name):
             model, state, multi_prompts, img_w, img_h
         )
 
-    log.info("Prompt '%s' result ready", prompt_name)
-
     if not all_masks:
         return {"error": "No masks generated", "num_masks": 0}
 
-    return {"num_masks": len(all_masks)}
+    # Cache this prompt's masks
+    cached["prompt_masks"][prompt_index] = (all_masks, all_scores)
+
+    # Build composite overlay from all cached prompts
+    overlay_b64 = _build_overlay(cached)
+
+    log.info("Prompt '%s' result ready", prompt_name)
+    return {"num_masks": len(all_masks), "overlay": overlay_b64}
 
 
 # ---------------------------------------------------------------------------
@@ -826,38 +828,22 @@ def _api_segment_one(body: dict) -> dict:
     node_id = str(body.get("node_id", ""))
     raw_prompt = body.get("prompt", {})
     prompt_name = str(body.get("prompt_name", "Prompt"))
+    prompt_index = body.get("prompt_index", 0)
 
     cached = _INTERACTIVE_CACHE.get(node_id)
     if not cached:
         return {"error": "Model not loaded. Queue the workflow first (Ctrl+Enter).", "_status": 400}
 
     try:
-        return _run_segment_sync_one(cached, raw_prompt, prompt_name)
+        return _run_segment_sync_one(cached, raw_prompt, prompt_name, prompt_index)
     except Exception as exc:
         log.exception("Interactive segmentation (single prompt '%s') failed", prompt_name)
-        return {"error": str(exc), "_status": 500}
-
-
-def _api_segment(body: dict) -> dict:
-    """Handle multi-prompt interactive segmentation (called via IPC)."""
-    node_id = str(body.get("node_id", ""))
-    raw_prompts = body.get("prompts", [])
-
-    cached = _INTERACTIVE_CACHE.get(node_id)
-    if not cached:
-        return {"error": "Model not loaded. Queue the workflow first (Ctrl+Enter).", "_status": 400}
-
-    try:
-        return _run_segment_sync(cached, raw_prompts)
-    except Exception as exc:
-        log.exception("Interactive segmentation failed")
         return {"error": str(exc), "_status": 500}
 
 
 # Declare routes for comfy-env proxy registration
 ROUTES = [
     {"method": "POST", "path": "/sam3/interactive_segment_one", "handler": "_api_segment_one"},
-    {"method": "POST", "path": "/sam3/interactive_segment",     "handler": "_api_segment"},
 ]
 
 

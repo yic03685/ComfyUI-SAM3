@@ -1,2 +1,2 @@
-comfy-env==0.2.45
+comfy-env==0.2.46
 comfy-3d-viewers==0.2.41

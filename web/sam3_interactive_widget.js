@@ -145,6 +145,7 @@ app.registerExtension({
                 image: null,
                 overlayImage: null,   // mask overlay from Run
                 overlayStale: false,  // true when prompts changed since last Run
+                modelReady: false,       // true after first successful execute()
                 isProcessing: false,     // true while the processing loop is active
                 promptQueue: [],         // {prompt, index} entries waiting to be processed
                 completedPrompts: new Set(), // prompt objects successfully segmented
@@ -292,6 +293,7 @@ app.registerExtension({
 
             // ---- onExecuted — receive images from workflow execution ----
             this.onExecuted = (message) => {
+                this.canvasWidget.modelReady = true;
                 if (message.bg_image && message.bg_image[0]) {
                     const img = new Image();
                     img.onload = () => {
@@ -354,11 +356,6 @@ app.registerExtension({
         // ---- Run: dispatch only the active prompt ----
         nodeType.prototype.runInteractiveSegment = function() {
             const cw = this.canvasWidget;
-            if (!cw.image) {
-                console.warn("[SAM3] No image loaded. Queue the workflow first.");
-                return;
-            }
-
             const idx = cw.activePromptIndex;
             const prompt = cw.prompts[idx];
 
@@ -384,11 +381,34 @@ app.registerExtension({
             this.processQueue();
         };
 
+        // ---- Auto-queue workflow to populate model cache ----
+        nodeType.prototype.ensureModelLoaded = function() {
+            const cw = this.canvasWidget;
+            if (cw.modelReady) return Promise.resolve();
+
+            // Queue the workflow so execute() runs, which loads the model + image
+            return new Promise((resolve) => {
+                const origOnExecuted = this.onExecuted;
+                this.onExecuted = (message) => {
+                    origOnExecuted.call(this, message);
+                    resolve();
+                };
+                console.log("[SAM3] Model not loaded — auto-queuing workflow...");
+                app.queuePrompt(0, 1);
+            });
+        };
+
         // ---- Sequential processing loop ----
         nodeType.prototype.processQueue = async function() {
             const cw = this.canvasWidget;
             if (cw.isProcessing) return;
             cw.isProcessing = true;
+
+            // If model hasn't been loaded yet, auto-queue the workflow first
+            if (!cw.modelReady) {
+                this.updateQueuePanel();
+                await this.ensureModelLoaded();
+            }
 
             while (cw.promptQueue.length > 0) {
                 const { prompt, index } = cw.promptQueue.shift();
@@ -418,7 +438,15 @@ app.registerExtension({
                     } else {
                         console.log(`[SAM3] Prompt "${name}" result received`);
                         cw.completedPrompts.add(prompt);
-                        await this.fetchProgressiveOverlay([...cw.completedPrompts]);
+                        if (data.overlay) {
+                            const oimg = new Image();
+                            oimg.onload = () => {
+                                cw.overlayImage = oimg;
+                                cw.overlayStale = false;
+                                this.redrawCanvas();
+                            };
+                            oimg.src = "data:image/jpeg;base64," + data.overlay;
+                        }
                     }
                 } catch (err) {
                     console.error(`[SAM3] Prompt "${name}" fetch failed:`, err);
@@ -443,6 +471,7 @@ app.registerExtension({
             const cw = this.canvasWidget;
             const active = cw.prompts[cw.activePromptIndex];
             const blocked = active && (active.isRunning || active.isPending);
+            console.log(`[SAM3] updateRunButton: active="${active?.name}", isRunning=${active?.isRunning}, isPending=${active?.isPending}, blocked=${!!blocked}`);
             cw.runBtn.textContent = "Run";
             cw.runBtn.disabled = !!blocked;
             cw.runBtn.style.background = blocked ? "#333" : "#2a7a2a";
@@ -586,32 +615,6 @@ app.registerExtension({
             input.onclick = (e) => e.stopPropagation();
         };
 
-        // ---- Progressive overlay: fetch combined mask for completed prompts ----
-        nodeType.prototype.fetchProgressiveOverlay = async function(completedRawPrompts) {
-            const cw = this.canvasWidget;
-            try {
-                const resp = await fetch("/sam3/interactive_segment", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        node_id: String(this.id),
-                        prompts: completedRawPrompts,
-                    })
-                });
-                const data = await resp.json();
-                if (resp.ok && data.overlay) {
-                    const oimg = new Image();
-                    oimg.onload = () => {
-                        cw.overlayImage = oimg;
-                        cw.overlayStale = false;
-                        this.redrawCanvas();
-                    };
-                    oimg.src = "data:image/jpeg;base64," + data.overlay;
-                }
-            } catch (err) {
-                console.error("[SAM3] Progressive overlay fetch failed:", err);
-            }
-        };
 
         // ---- Queue panel ----
         nodeType.prototype.updateQueuePanel = function() {
@@ -646,7 +649,9 @@ app.registerExtension({
                 name: `Prompt ${newIndex}`,
             });
             this.canvasWidget.activePromptIndex = this.canvasWidget.prompts.length - 1;
+            console.log(`[SAM3] New prompt tab created: "Prompt ${newIndex}", activeIndex=${this.canvasWidget.activePromptIndex}`);
             this.rebuildTabBar();
+            this.updateRunButton();
             this.updateStorage();
             this.redrawCanvas();
         };
