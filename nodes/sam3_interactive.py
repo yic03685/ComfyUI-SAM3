@@ -683,7 +683,6 @@ class SAM3InteractiveCollector(io.ComfyNode):
         # on large images in NO_VRAM / lowvram mode.
         gc.collect()
         comfy.model_management.soft_empty_cache(force=True)
-        torch.cuda.synchronize(comfy.model_management.get_torch_device())
 
         state = processor.set_image(pil_image)
 

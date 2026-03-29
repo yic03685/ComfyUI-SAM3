@@ -728,7 +728,6 @@ class SAM3MultipromptSegmentation(io.ComfyNode):
         # on large images in NO_VRAM / lowvram mode.
         gc.collect()
         comfy.model_management.soft_empty_cache(force=True)
-        torch.cuda.synchronize(comfy.model_management.get_torch_device())
 
         # Set image once (feature extraction)
         state = processor.set_image(pil_image)
