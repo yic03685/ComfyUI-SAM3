@@ -1,11 +1,11 @@
 {
-  "timestamp": "2026-02-24T08:13:22.690109+00:00",
+  "timestamp": "2026-03-30T20:27:04.282379+00:00",
   "platform": "windows_portable",
   "hardware": {
     "os": "Windows-2025Server-10.0.26100-SP0",
     "cpu": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD"
   },
-  "commit_hash": "1db099cc46cd79d0ac78d23f0cc8908bcfb30cd2",
+  "commit_hash": "85d01832fb7c42692bd0ddbcca5e3421d337dcbd",
   "success": true,
   "summary": {
     "total": 5,
@@ -16,7 +16,7 @@
     {
       "name": "image_seg_point",
       "status": "pass",
-      "duration_seconds": 72.72,
+      "duration_seconds": 106.36,
       "error": null,
       "hardware": {
         "os": "Windows-2025Server-10.0.26100-SP0",
@@ -24,17 +24,17 @@
       },
       "resources": {
         "ram": {
-          "peak": 8.22,
-          "avg": 6.62
+          "peak": 9.03,
+          "avg": 6.8
         },
         "total_ram_gb": 16.0,
-        "samples": 73
+        "samples": 106
       }
     },
     {
       "name": "image_seg_text",
       "status": "pass",
-      "duration_seconds": 70.14,
+      "duration_seconds": 80.82,
       "error": null,
       "hardware": {
         "os": "Windows-2025Server-10.0.26100-SP0",
@@ -42,17 +42,17 @@
       },
       "resources": {
         "ram": {
-          "peak": 8.93,
-          "avg": 6.47
+          "peak": 9.44,
+          "avg": 7.85
         },
         "total_ram_gb": 16.0,
-        "samples": 70
+        "samples": 81
       }
     },
     {
       "name": "scene_seg",
       "status": "pass",
-      "duration_seconds": 87.18,
+      "duration_seconds": 106.2,
       "error": null,
       "hardware": {
         "os": "Windows-2025Server-10.0.26100-SP0",
@@ -60,17 +60,17 @@
       },
       "resources": {
         "ram": {
-          "peak": 10.19,
-          "avg": 7.35
+          "peak": 11.17,
+          "avg": 8.25
         },
         "total_ram_gb": 16.0,
-        "samples": 87
+        "samples": 107
       }
     },
     {
       "name": "scene_seg_interactive",
       "status": "pass",
-      "duration_seconds": 75.84,
+      "duration_seconds": 80.62,
       "error": null,
       "hardware": {
         "os": "Windows-2025Server-10.0.26100-SP0",
@@ -78,11 +78,11 @@
       },
       "resources": {
         "ram": {
-          "peak": 9.93,
-          "avg": 6.47
+          "peak": 10.75,
+          "avg": 8.68
         },
         "total_ram_gb": 16.0,
-        "samples": 76
+        "samples": 81
       }
     },
     {

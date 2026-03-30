@@ -1,42 +1,145 @@
 Capturing execution frames: image_seg_point.json
-  [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
-  [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
-  [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
-  [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
-  [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
-  [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
-  [Console-warning] [ComfyUI Deprecated] Importing from "scripts/ui.js" is deprecated and will be removed in v1.34.
-  [Console-warning] [ComfyUI Notice] "scripts/widgets.js" is an internal module, not part of the public API. Future updates may break this import.
-  [Console-warning] [ComfyUI Notice] "extensions/core/widgetInputs.js" is an internal module, not part of the public API. Future updates may break this import.
-  [Console-warning] [ComfyUI Notice] "scripts/utils.js" is an internal module, not part of the public API. Future updates may break this import.
-  [Console-warning] [MaskEditor] ComfyApp.open_maskeditor is deprecated. Plugins should migrate to using the command system or direct node context menu integration.
-  [Console-warning] [ComfyUI Deprecated] Importing from "scripts/ui/components/buttonGroup.js" is deprecated and will be removed in v1.34.
-  [Console-warning] [ComfyUI Deprecated] Importing from "scripts/ui/components/button.js" is deprecated and will be removed in v1.34.
+  [ComfyUI] [DEPRECATION WARNING] Detected import of deprecated legacy API: /scripts/ui.js. This is likely caused by a custom node extension using outdated APIs. Please update your extensions or contact the extension author for an updated version.
+  [ComfyUI] [DEPRECATION WARNING] Detected import of deprecated legacy API: /extensions/core/widgetInputs.js. This is likely caused by a custom node extension using outdated APIs. Please update your extensions or contact the extension author for an updated version.
+  [ComfyUI] [DEPRECATION WARNING] Detected import of deprecated legacy API: /scripts/ui/components/buttonGroup.js. This is likely caused by a custom node extension using outdated APIs. Please update your extensions or contact the extension author for an updated version.
+  [ComfyUI] [DEPRECATION WARNING] Detected import of deprecated legacy API: /scripts/ui/components/button.js. This is likely caused by a custom node extension using outdated APIs. Please update your extensions or contact the extension author for an updated version.
   Frame 1 saved (frame_000.jpg, t=0.0s)
   Validating workflow...
+  [ComfyUI] === /validate endpoint called ===
+  [ComfyUI] Received JSON with keys: ['prompt']
+  [ComfyUI] Prompt has 6 nodes
+  [ComfyUI]   Node 1: LoadImage
   Queuing workflow for execution...
+  [ComfyUI]     Inputs: {"image": "example_image.jpg"}
+  [ComfyUI]   Node 15: SAM3PointCollector
+  [ComfyUI]     Inputs: {"points_store": "{\"positive\":[{\"x\":426.27735719657574,\"y\":321.42611685978835},{\"x\":417.13743597288953,\"y\":407.3413796907987},{\"x\":431.76130993078743,\"y\":549.9241563039649}],\"negative\"
+  [ComfyUI]   Node 28: PreviewImage
+  [ComfyUI]     Inputs: {"images": ["31", 2]}
+  [ComfyUI]   Node 29: MaskPreview
+  [ComfyUI]     Inputs: {"mask": ["31", 0]}
+  [ComfyUI]   Node 30: LoadSAM3Model
+  [ComfyUI]     Inputs: {"precision": "auto", "compile": false}
+  [ComfyUI]   Node 31: SAM3Segmentation
+  [ComfyUI]     Inputs: {"refinement_iterations": 0, "use_multimask": true, "output_best_mask": true, "sam3_model_config": ["30", 0], "image": ["1", 0], "positive_points": ["15", 0], "negative_points": ["15", 1]}
+  [ComfyUI] Generated prompt_id: f2c8172e-3228-468c-a449-9b46bf7785b4
+  [ComfyUI] Calling execution.validate_prompt()...
+  [ComfyUI] Validation result: valid=True
+  [ComfyUI] === Validation PASSED ===
+  [ComfyUI] got prompt
+  [ComfyUI] [comfy-env] Running SAM3PointCollector: points_store: '{"positive":[{"x":426.27735719657574,"y":321.42611685978..., coordinates: '[{"x":426.27735719657574,"y":321.42611685978835},{"x":41..., neg_coordinates: '[]', image: torch.float32 [1,720,1280,3] cpu
+  [ComfyUI] [VRAM] Before SAM3PointCollector: 1271 / 24575 MB
+  [ComfyUI] [SubprocessWorker] call_method: nodes.sam3_interactive.SAM3PointCollector.EXECUTE_NORMALIZED
+  [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
+  [ComfyUI] ComfyUI-Multiband loaded: 15 nodes registered
+  [ComfyUI] [comfy-env] default: Library/bin has 69 DLLs
+  [ComfyUI] [comfy-env] Removed stale temp dir: C:\Windows\TEMP\comfyui_pvenv_9p2kpb4w
+  [ComfyUI] [comfy-env] SubprocessWorker: D:\ce\_env_489aef\.pixi\envs\default\python.exe
+  [ComfyUI] [comfy-env] env_vars: {'COMFYUI_BASE': 'D:\\workspaces\\SAM3-2010\\ComfyUI'}
+  [ComfyUI] [ComfyUI-SAM3] python: D:\ce\_env_489aef\.pixi\envs\default\python.exe
+  [ComfyUI] [ComfyUI-SAM3] sys_path sent to worker: ['D:\\workspaces\\SAM3-2010\\ComfyUI', 'D:\\workspaces\\SAM3-2010\\ComfyUI\\custom_nodes\\ComfyUI-SAM3', 'D:\\ce\\_env_489aef\\.pixi\\envs\\default\\Lib\\site-packages', 'D:\\workspaces\\SAM3-2010\\ComfyUI\\custom_nodes\\ComfyUI-SAM3']
+  [ComfyUI] [SubprocessWorker] is_pixi=True, python=D:\ce\_env_489aef\.pixi\envs\default\python.exe
+  [ComfyUI] [SubprocessWorker] launching cmd=['D:\\ce\\_env_489aef\\.pixi\\envs\\default\\python.exe', 'C:\\Windows\\TEMP\\comfyui_pvenv_i6d7663z\\persistent_worker.py', 'tcp://127.0.0.1:59484']...
+  [ComfyUI] [SubprocessWorker] PATH has 13 entries:
+  [ComfyUI] [SubprocessWorker]   [0] D:\ce\_env_489aef\.pixi\envs\default
+  [ComfyUI] [SubprocessWorker]   [1] D:\ce\_env_489aef\.pixi\envs\default\Library\mingw-w64\bin
+  [ComfyUI] [SubprocessWorker]   [2] D:\ce\_env_489aef\.pixi\envs\default\Library\usr\bin
+  [ComfyUI] [SubprocessWorker]   [3] D:\ce\_env_489aef\.pixi\envs\default\Library\bin
+  [ComfyUI] [SubprocessWorker]   [4] D:\ce\_env_489aef\.pixi\envs\default\Scripts
+  [ComfyUI] [SubprocessWorker]   [5] D:\ce\_env_489aef\.pixi\envs\default\Library\bin\Lib\site-packages\bpy
+  [ComfyUI] [SubprocessWorker]   [6] D:\ce\_env_489aef\.pixi\envs\default
+  [ComfyUI] [SubprocessWorker]   [7] D:\ce\_env_489aef\.pixi\envs\default\Library\bin
+  [ComfyUI] [SubprocessWorker]   [8] D:\ce\_env_489aef\.pixi\envs\default\Scripts
+  [ComfyUI] [SubprocessWorker]   [9] D:\ce\_env_489aef\.pixi\envs\default\Lib\site-packages\bpy
+  [ComfyUI] [SubprocessWorker]   ... and 3 more
+  [ComfyUI] [worker] PATH has 13 entries:
+  [ComfyUI] [worker]   [0] D:\ce\_env_489aef\.pixi\envs\default
+  [ComfyUI] [worker]   [1] D:\ce\_env_489aef\.pixi\envs\default\Library\mingw-w64\bin
+  [ComfyUI] [worker]   [2] D:\ce\_env_489aef\.pixi\envs\default\Library\usr\bin
+  [ComfyUI] [worker]   [3] D:\ce\_env_489aef\.pixi\envs\default\Library\bin
+  [ComfyUI] [worker]   [4] D:\ce\_env_489aef\.pixi\envs\default\Scripts
+  [ComfyUI] [worker]   [5] D:\ce\_env_489aef\.pixi\envs\default\Library\bin\Lib\site-packages\bpy
+  [ComfyUI] [worker]   [6] D:\ce\_env_489aef\.pixi\envs\default
+  [ComfyUI] [worker]   [7] D:\ce\_env_489aef\.pixi\envs\default\Library\bin
+  [ComfyUI] [worker]   [8] D:\ce\_env_489aef\.pixi\envs\default\Scripts
+  [ComfyUI] [worker]   [9] D:\ce\_env_489aef\.pixi\envs\default\Lib\site-packages\bpy
+  [ComfyUI] [worker]   [10] C:\Windows\System32
+  [ComfyUI] [worker]   [11] C:\Windows
+  [ComfyUI] [worker]   [12] C:\Windows\System32\Wbem
+  Frame 2 saved (frame_001.jpg, t=2.4s)
+  [capture-periodic] freeze=7ms shot=182ms unfreeze=4ms saved=True
+  Frame 3 saved (frame_002.jpg, t=4.7s)
+  [capture-periodic] freeze=7ms shot=166ms unfreeze=5ms saved=True
+  [ComfyUI] [worker:ComfyUI-SAM3] WARNING: WARNING: You need pytorch with cu130 or higher to use optimized CUDA operations.
+  [ComfyUI] [SubprocessWorker] worker started/confirmed
+  [ComfyUI] [comfy-env] PRE-SERIALIZE 'image' shape: torch.Size([1, 720, 1280, 3])
+  [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
+  [ComfyUI] [SubprocessWorker] created 0 shm blocks
+  [ComfyUI] [SubprocessWorker] sending request via socket...
+  [ComfyUI] [SubprocessWorker] call_id=1 sending call_method
+  [ComfyUI] [worker:ComfyUI-SAM3] [comfy-env] _from_shm got dict with keys: ['__type__', 'strategy', 'manager_path', 'storage_key', 'storage_size']
+  [ComfyUI] [worker:ComfyUI-SAM3] [comfy-env] DESERIALIZE TensorRef: tensor_size=[1, 720, 1280, 3]
+  [ComfyUI] [worker:ComfyUI-SAM3] [comfy-env] DESERIALIZED tensor shape: torch.Size([1, 720, 1280, 3])
+  [ComfyUI] [SubprocessWorker] got response: ok
+  [ComfyUI] [comfy-env] SAM3PointCollector done (6.00s): result: NodeOutput
+  [ComfyUI] [VRAM] After SAM3PointCollector: 1271 / 24575 MB
+  [ComfyUI] [comfy-env] Running LoadSAM3Model: precision: 'auto', compile: False
+  [ComfyUI] [VRAM] Before LoadSAM3Model: 1271 / 24575 MB
+  [ComfyUI] [SubprocessWorker] call_method: nodes.load_model.LoadSAM3Model.EXECUTE_NORMALIZED
+  [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
+  [ComfyUI] [ComfyUI-SAM3] Health check: ping (timeout=5.0s)...
+  [ComfyUI] [ComfyUI-SAM3] Health check: ok
+  [ComfyUI] [SubprocessWorker] worker started/confirmed
+  [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
+  [ComfyUI] [SubprocessWorker] created 0 shm blocks
+  [ComfyUI] [SubprocessWorker] sending request via socket...
+  [ComfyUI] [SubprocessWorker] call_id=2 sending call_method
   Node executed (1 total), capturing...
-  Frame 2 saved (frame_001.jpg, t=1.6s)
-  [capture-node] freeze=20ms shot=433ms unfreeze=20ms saved=True
-  [capture-loop] iter=50 t=10.5s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=26
-  [capture-loop] iter=100 t=19.4s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=23
-  [capture-loop] iter=150 t=28.7s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=19
-  [capture-loop] iter=200 t=37.3s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=22
-  [capture-loop] iter=250 t=46.6s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=27
-  [capture-loop] iter=300 t=55.1s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=17
-  Frame 3 saved (frame_002.jpg, t=55.4s)
-  [capture-periodic] freeze=18ms shot=490ms unfreeze=23ms saved=True
-  [capture-loop] iter=350 t=64.3s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=25
-  Node executed (2 total), capturing...
-  Frame 4 saved (frame_003.jpg, t=67.2s)
-  [capture-node] freeze=124ms shot=625ms unfreeze=24ms saved=True
+  Frame 4 saved (frame_003.jpg, t=6.5s)
+  [capture-node] freeze=5ms shot=209ms unfreeze=5ms saved=True
+  [capture-loop] iter=50 t=6.9s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=5
+  [capture-loop] iter=100 t=13.2s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=5
+  [capture-loop] iter=150 t=19.6s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=6
+  [capture-loop] iter=200 t=26.0s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=5
+  [capture-loop] iter=250 t=32.5s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=4
+  [ComfyUI] [SubprocessWorker] got response: ok
+  [ComfyUI] [comfy-env] LoadSAM3Model done (30.83s): result: NodeOutput
+  [ComfyUI] [VRAM] After LoadSAM3Model: 1271 / 24575 MB
+  [ComfyUI] [comfy-env] Running SAM3Segmentation: refinement_iterations: 0, use_multimask: True, output_best_mask: True, sam3_model_config: dict, image: torch.float32 [1,720,1280,3] cpu, positive_points: dict, negative_points: dict
+  [ComfyUI] [VRAM] Before SAM3Segmentation: 1271 / 24575 MB
+  [ComfyUI] [SubprocessWorker] call_method: nodes.segmentation.SAM3Segmentation.EXECUTE_NORMALIZED
+  [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
+  [ComfyUI] [ComfyUI-SAM3] Health check: ping (timeout=5.0s)...
+  [ComfyUI] [ComfyUI-SAM3] Health check: ok
+  [ComfyUI] [SubprocessWorker] worker started/confirmed
+  [ComfyUI] [comfy-env] PRE-SERIALIZE 'image' shape: torch.Size([1, 720, 1280, 3])
+  [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
+  [ComfyUI] [SubprocessWorker] created 0 shm blocks
+  [ComfyUI] [SubprocessWorker] sending request via socket...
+  [ComfyUI] [SubprocessWorker] call_id=3 sending call_method
+  [ComfyUI] [worker:ComfyUI-SAM3] [comfy-env] _from_shm got dict with keys: ['__type__', 'strategy', 'manager_path', 'storage_key', 'storage_size']
+  [ComfyUI] [worker:ComfyUI-SAM3] [comfy-env] DESERIALIZE TensorRef: tensor_size=[1, 720, 1280, 3]
+  [ComfyUI] [worker:ComfyUI-SAM3] [comfy-env] DESERIALIZED tensor shape: torch.Size([1, 720, 1280, 3])
+  Frame 5 saved (frame_004.jpg, t=38.2s)
+  [capture-periodic] freeze=4ms shot=197ms unfreeze=5ms saved=True
+  [capture-loop] iter=300 t=38.9s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=5
+  [ComfyUI] [SubprocessWorker] callback 'request_vram_budget' from call_id=3
+  [ComfyUI] [comfy-env] VRAM request: 1.84GB, free before eviction: 24.44GB
+  [ComfyUI] [comfy-env] VRAM after eviction: 24.44GB
+  [ComfyUI] [worker:ComfyUI-SAM3] [VRAM] +321MB (now 321MB) reserved=352MB peak=321MB
+  [ComfyUI] [worker:ComfyUI-SAM3] [VRAM] +1371MB (now 1693MB) reserved=1696MB peak=1693MB
+  [ComfyUI] [worker:ComfyUI-SAM3] [VRAM] +208MB (now 1902MB) reserved=1952MB peak=1902MB
+  [ComfyUI] [SubprocessWorker] got response: ok
+  [ComfyUI] [comfy-env] SAM3Segmentation done (7.84s): result: NodeOutput
+  [ComfyUI] [VRAM] After SAM3Segmentation: 1271 / 24575 MB
+  [ComfyUI] Prompt executed in 44.94 seconds
+  [capture-loop] iter=350 t=45.2s state={'complete': False, 'error': None, 'executedCount': 3, 'wsState': 1} eval_ms=12
   Node executed (3 total), capturing...
-  Frame 5 saved (frame_004.jpg, t=68.4s)
-  [capture-node] freeze=18ms shot=441ms unfreeze=0ms saved=True
-  Execution complete (t=68.4s)
-  Captured 5 unique frames over 69.02s
+  Frame 6 saved (frame_005.jpg, t=45.4s)
+  [capture-node] freeze=5ms shot=187ms unfreeze=5ms saved=True
+  Execution complete (t=45.7s)
+  Captured 6 unique frames over 45.75s
   [debug] iframes: 0
   [timing] trigger_3d_previews: 0.0s
   Saved high-quality screenshot: image_seg_point_executed.png
-  [timing] final_screenshot: 2.5s
-    Captured 6 video frames
+  [timing] final_screenshot: 1.1s
+    Captured 7 video frames

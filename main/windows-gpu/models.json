@@ -1,13 +1,13 @@
 {
-  "models_dir": "H:\\ComfyUI\\models",
+  "models_dir": "D:\\workspaces\\SAM3-2010\\ComfyUI\\models",
   "summary": {
     "total_files": 3,
-    "total_size_bytes": 3449860760,
+    "total_size_bytes": 3449860761,
     "total_size_human": "3.2 GB"
   },
   "folders": {
     "sam3": {
-      "total_size_bytes": 3449860760,
+      "total_size_bytes": 3449860761,
       "total_size_human": "3.2 GB",
       "source": {
         "type": "unknown"
@@ -20,8 +20,8 @@
         },
         {
           "path": ".cache\\huggingface\\download\\sam3.safetensors.metadata",
-          "size_bytes": 127,
-          "size_human": "127.0 B"
+          "size_bytes": 128,
+          "size_human": "128.0 B"
         },
         {
           "path": ".cache\\huggingface\\.gitignore",

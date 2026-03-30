@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-02-26T01:02:30.556091+00:00",
+  "timestamp": "2026-03-30T20:46:17.587349+00:00",
   "platform": "linux",
   "hardware": {
-    "os": "Linux-6.8.0-90-generic-x86_64-with-glibc2.35",
-    "cpu": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
-    "gpu": "NVIDIA RTX A6000"
+    "os": "Linux-6.8.0-106-generic-x86_64-with-glibc2.39",
+    "cpu": "AMD Ryzen 5 3600 6-Core Processor",
+    "gpu": "NVIDIA GeForce RTX 5060"
   },
-  "commit_hash": "1cb178c214cfe6151b065d4f9764773675387c7a",
+  "commit_hash": "85d01832fb7c42692bd0ddbcca5e3421d337dcbd",
   "success": true,
   "summary": {
     "total": 5,
@@ -17,115 +17,115 @@
     {
       "name": "image_seg_point",
       "status": "pass",
-      "duration_seconds": 53.22,
+      "duration_seconds": 46.91,
       "error": null,
       "hardware": {
-        "os": "Linux-6.8.0-90-generic-x86_64-with-glibc2.35",
-        "cpu": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
-        "gpu": "NVIDIA RTX A6000"
+        "os": "Linux-6.8.0-106-generic-x86_64-with-glibc2.39",
+        "cpu": "AMD Ryzen 5 3600 6-Core Processor",
+        "gpu": "NVIDIA GeForce RTX 5060"
       },
       "resources": {
         "ram": {
-          "peak": 4.63,
-          "avg": 2.42
+          "peak": 7.09,
+          "avg": 2.67
         },
-        "total_ram_gb": 47.1,
-        "samples": 50,
+        "total_ram_gb": 31.3,
+        "samples": 46,
         "vram": {
-          "peak": 5.44,
-          "avg": 2.62
+          "peak": 2.39,
+          "avg": 0.43
         }
       }
     },
     {
       "name": "image_seg_text",
       "status": "pass",
-      "duration_seconds": 19.8,
+      "duration_seconds": 11.88,
       "error": null,
       "hardware": {
-        "os": "Linux-6.8.0-90-generic-x86_64-with-glibc2.35",
-        "cpu": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
-        "gpu": "NVIDIA RTX A6000"
+        "os": "Linux-6.8.0-106-generic-x86_64-with-glibc2.39",
+        "cpu": "AMD Ryzen 5 3600 6-Core Processor",
+        "gpu": "NVIDIA GeForce RTX 5060"
       },
       "resources": {
         "ram": {
-          "peak": 7.87,
-          "avg": 4.81
+          "peak": 4.55,
+          "avg": 4.42
         },
-        "total_ram_gb": 47.1,
-        "samples": 19,
+        "total_ram_gb": 31.3,
+        "samples": 12,
         "vram": {
-          "peak": 5.5,
-          "avg": 3.4
+          "peak": 2.54,
+          "avg": 2.37
         }
       }
     },
     {
       "name": "scene_seg",
       "status": "pass",
-      "duration_seconds": 64.99,
+      "duration_seconds": 31.98,
       "error": null,
       "hardware": {
-        "os": "Linux-6.8.0-90-generic-x86_64-with-glibc2.35",
-        "cpu": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
-        "gpu": "NVIDIA RTX A6000"
+        "os": "Linux-6.8.0-106-generic-x86_64-with-glibc2.39",
+        "cpu": "AMD Ryzen 5 3600 6-Core Processor",
+        "gpu": "NVIDIA GeForce RTX 5060"
       },
       "resources": {
         "ram": {
-          "peak": 9.05,
-          "avg": 7.19
+          "peak": 8.8,
+          "avg": 6.65
         },
-        "total_ram_gb": 47.1,
-        "samples": 61,
+        "total_ram_gb": 31.3,
+        "samples": 31,
         "vram": {
-          "peak": 5.17,
-          "avg": 4.17
+          "peak": 4.17,
+          "avg": 3.48
         }
       }
     },
     {
       "name": "scene_seg_interactive",
       "status": "pass",
-      "duration_seconds": 28.37,
+      "duration_seconds": 17.0,
       "error": null,
       "hardware": {
-        "os": "Linux-6.8.0-90-generic-x86_64-with-glibc2.35",
-        "cpu": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
-        "gpu": "NVIDIA RTX A6000"
+        "os": "Linux-6.8.0-106-generic-x86_64-with-glibc2.39",
+        "cpu": "AMD Ryzen 5 3600 6-Core Processor",
+        "gpu": "NVIDIA GeForce RTX 5060"
       },
       "resources": {
         "ram": {
-          "peak": 7.94,
-          "avg": 6.43
+          "peak": 10.98,
+          "avg": 7.95
         },
-        "total_ram_gb": 47.1,
-        "samples": 27,
+        "total_ram_gb": 31.3,
+        "samples": 17,
         "vram": {
-          "peak": 5.3,
-          "avg": 4.0
+          "peak": 3.79,
+          "avg": 3.23
         }
       }
     },
     {
       "name": "video_point_prompt",
       "status": "pass",
-      "duration_seconds": 53.37,
+      "duration_seconds": 42.63,
       "error": null,
       "hardware": {
-        "os": "Linux-6.8.0-90-generic-x86_64-with-glibc2.35",
-        "cpu": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
-        "gpu": "NVIDIA RTX A6000"
+        "os": "Linux-6.8.0-106-generic-x86_64-with-glibc2.39",
+        "cpu": "AMD Ryzen 5 3600 6-Core Processor",
+        "gpu": "NVIDIA GeForce RTX 5060"
       },
       "resources": {
         "ram": {
-          "peak": 8.13,
-          "avg": 6.71
+          "peak": 9.07,
+          "avg": 8.28
         },
-        "total_ram_gb": 47.1,
-        "samples": 51,
+        "total_ram_gb": 31.3,
+        "samples": 42,
         "vram": {
-          "peak": 6.31,
-          "avg": 5.23
+          "peak": 3.8,
+          "avg": 3.4
         }
       }
     }

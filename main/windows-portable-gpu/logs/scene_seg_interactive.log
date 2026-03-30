@@ -1,41 +1,86 @@
 Capturing execution frames: scene_seg_interactive.json
-  [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
-  [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
-  [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
-  [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
-  [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
-  [Console-warning] [ComfyUI Deprecated] Importing from "scripts/ui.js" is deprecated and will be removed in v1.34.
-  [Console-warning] [ComfyUI Notice] "scripts/widgets.js" is an internal module, not part of the public API. Future updates may break this import.
-  [Console-warning] [ComfyUI Notice] "extensions/core/widgetInputs.js" is an internal module, not part of the public API. Future updates may break this import.
-  [Console-warning] [ComfyUI Notice] "scripts/utils.js" is an internal module, not part of the public API. Future updates may break this import.
-  [Console-warning] [MaskEditor] ComfyApp.open_maskeditor is deprecated. Plugins should migrate to using the command system or direct node context menu integration.
-  [Console-warning] [ComfyUI Deprecated] Importing from "scripts/ui/components/buttonGroup.js" is deprecated and will be removed in v1.34.
-  [Console-warning] [ComfyUI Deprecated] Importing from "scripts/ui/components/button.js" is deprecated and will be removed in v1.34.
+  [ComfyUI] Exception in callback _ProactorBasePipeTransport._call_connection_lost()
+  [ComfyUI] handle: <Handle _ProactorBasePipeTransport._call_connection_lost()>
+  [ComfyUI] Traceback (most recent call last):
+  [ComfyUI]   File "asyncio\events.py", line 89, in _run
+  [ComfyUI]   File "asyncio\proactor_events.py", line 165, in _call_connection_lost
+  [ComfyUI] ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
   Frame 1 saved (frame_000.jpg, t=0.0s)
   Validating workflow...
+  [ComfyUI] === /validate endpoint called ===
+  [ComfyUI] Received JSON with keys: ['prompt']
+  [ComfyUI] Prompt has 4 nodes
   Queuing workflow for execution...
-  Frame 2 saved (frame_001.jpg, t=4.3s)
-  [capture-periodic] freeze=164ms shot=562ms unfreeze=25ms saved=True
-  Frame 3 saved (frame_002.jpg, t=7.2s)
-  [capture-periodic] freeze=28ms shot=437ms unfreeze=27ms saved=True
-  Frame 4 saved (frame_003.jpg, t=9.8s)
-  [capture-periodic] freeze=20ms shot=409ms unfreeze=32ms saved=True
-  [capture-loop] iter=50 t=12.4s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=56
-  Frame 5 saved (frame_004.jpg, t=17.4s)
-  [capture-periodic] freeze=26ms shot=439ms unfreeze=27ms saved=True
-  [capture-loop] iter=100 t=21.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=19
-  Frame 6 saved (frame_005.jpg, t=22.7s)
-  [capture-periodic] freeze=24ms shot=393ms unfreeze=31ms saved=True
-  Frame 7 saved (frame_006.jpg, t=27.7s)
-  [capture-periodic] freeze=21ms shot=408ms unfreeze=26ms saved=True
-  [capture-loop] iter=150 t=30.2s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=30
+  [ComfyUI]   Node 1: LoadImage
+  [ComfyUI]     Inputs: {"image": "image.png"}
+  [ComfyUI]   Node 4: MaskPreview
+  [ComfyUI]     Inputs: {"mask": ["26", 0]}
+  [ComfyUI]   Node 12: LoadSAM3Model
+  [ComfyUI]     Inputs: {"precision": "auto", "compile": false}
+  [ComfyUI]   Node 26: SAM3InteractiveCollector
+  [ComfyUI]     Inputs: {"multi_prompts_store": "[{\"positive_points\":[{\"x\":3348.288109906738,\"y\":2452.2208696844737}],\"negative_points\":[],\"positive_boxes\":[],\"negative_boxes\":[],\"name\":\"Prompt 1\"},{\"positiv
+  [ComfyUI] Generated prompt_id: b6d7c140-48ee-422a-9e6a-70fad1dc255c
+  [ComfyUI] Calling execution.validate_prompt()...
+  [ComfyUI] Validation result: valid=True
+  [ComfyUI] === Validation PASSED ===
+  [ComfyUI] got prompt
+  [ComfyUI] [comfy-env] Running LoadSAM3Model: precision: 'auto', compile: False
+  [ComfyUI] [VRAM] Before LoadSAM3Model: 1271 / 24575 MB
+  [ComfyUI] [SubprocessWorker] call_method: nodes.load_model.LoadSAM3Model.EXECUTE_NORMALIZED
+  [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
+  [ComfyUI] [ComfyUI-SAM3] Health check: ping (timeout=5.0s)...
+  [ComfyUI] [ComfyUI-SAM3] Health check: ok
+  [ComfyUI] [SubprocessWorker] worker started/confirmed
+  [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
+  [ComfyUI] [SubprocessWorker] created 0 shm blocks
+  [ComfyUI] [SubprocessWorker] sending request via socket...
+  [ComfyUI] [SubprocessWorker] call_id=9 sending call_method
+  [ComfyUI] [SubprocessWorker] got response: ok
+  [ComfyUI] [comfy-env] LoadSAM3Model done (0.02s): result: NodeOutput
+  [ComfyUI] [VRAM] After LoadSAM3Model: 1271 / 24575 MB
+  [ComfyUI] [comfy-env] Running SAM3InteractiveCollector: multi_prompts_store: '[{"positive_points":[{"x":3348.288109906738,"y":2452.220..., sam3_model_config: dict, image: torch.float32 [1,4480,6720,3] cpu, unique_id: '26'
+  [ComfyUI] [VRAM] Before SAM3InteractiveCollector: 1271 / 24575 MB
+  [ComfyUI] [SubprocessWorker] call_method: nodes.sam3_interactive.SAM3InteractiveCollector.EXECUTE_NORMALIZED
+  [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
+  [ComfyUI] [ComfyUI-SAM3] Health check: ping (timeout=5.0s)...
+  [ComfyUI] [ComfyUI-SAM3] Health check: ok
+  [ComfyUI] [SubprocessWorker] worker started/confirmed
+  [ComfyUI] [comfy-env] PRE-SERIALIZE 'image' shape: torch.Size([1, 4480, 6720, 3])
+  [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
+  [ComfyUI] [SubprocessWorker] created 0 shm blocks
+  [ComfyUI] [SubprocessWorker] sending request via socket...
+  [ComfyUI] [SubprocessWorker] call_id=10 sending call_method
+  [ComfyUI] [worker:ComfyUI-SAM3] [comfy-env] _from_shm got dict with keys: ['__type__', 'strategy', 'manager_path', 'storage_key', 'storage_size']
+  [ComfyUI] [worker:ComfyUI-SAM3] [comfy-env] DESERIALIZE TensorRef: tensor_size=[1, 4480, 6720, 3]
+  [ComfyUI] [worker:ComfyUI-SAM3] [comfy-env] DESERIALIZED tensor shape: torch.Size([1, 4480, 6720, 3])
+  Frame 2 saved (frame_001.jpg, t=2.4s)
+  [capture-periodic] freeze=6ms shot=232ms unfreeze=7ms saved=True
+  [ComfyUI] [SubprocessWorker] callback 'request_vram_budget' from call_id=10
+  [ComfyUI] [comfy-env] VRAM request: 1.84GB, free before eviction: 24.44GB
+  [ComfyUI] [comfy-env] VRAM after eviction: 24.44GB
+  [ComfyUI] [worker:ComfyUI-SAM3] [VRAM] -3443MB (now 9MB) reserved=64MB peak=3833MB
+  [ComfyUI] [worker:ComfyUI-SAM3] [VRAM] +1253MB (now 1262MB) reserved=1344MB peak=3833MB
+  Frame 3 saved (frame_002.jpg, t=4.8s)
+  [capture-periodic] freeze=4ms shot=157ms unfreeze=4ms saved=True
+  [ComfyUI] [worker:ComfyUI-SAM3] [VRAM] +503MB (now 1765MB) reserved=1824MB peak=3833MB
+  [ComfyUI] [worker:ComfyUI-SAM3] [VRAM] +292MB (now 2058MB) reserved=2240MB peak=3833MB
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=10
+  [capture-loop] iter=50 t=6.6s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=14
+  Frame 4 saved (frame_003.jpg, t=7.0s)
+  [capture-periodic] freeze=6ms shot=233ms unfreeze=7ms saved=True
+  [ComfyUI] [SubprocessWorker] got response: ok
+  [ComfyUI] [comfy-env] SAM3InteractiveCollector done (7.79s): result: NodeOutput
+  [ComfyUI] [VRAM] After SAM3InteractiveCollector: 1271 / 24575 MB
+  [ComfyUI] Prompt executed in 9.69 seconds
+  Node executed (1 total), capturing...
+  Frame 5 saved (frame_004.jpg, t=10.4s)
+  [capture-node] freeze=6ms shot=396ms unfreeze=4ms saved=True
   Node executed (2 total), capturing...
-  Frame 8 saved (frame_007.jpg, t=36.8s)
-  [capture-node] freeze=9582ms shot=1196ms unfreeze=0ms saved=True
-  Execution complete (t=36.8s)
-  Captured 8 unique frames over 47.72s
+  [capture-node] freeze=8ms shot=196ms unfreeze=0ms saved=False
+  Execution complete (t=11.1s)
+  Captured 5 unique frames over 11.31s
   [debug] iframes: 0
   [timing] trigger_3d_previews: 0.0s
   Saved high-quality screenshot: scene_seg_interactive_executed.png
-  [timing] final_screenshot: 2.1s
-    Captured 9 video frames
+  [timing] final_screenshot: 1.3s
+    Captured 6 video frames
