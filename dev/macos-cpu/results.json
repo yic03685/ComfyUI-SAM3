@@ -1,0 +1,96 @@
+{
+  "timestamp": "2026-03-30T20:40:40.641120+00:00",
+  "platform": "macos",
+  "hardware": {
+    "os": "macOS-15.7.4-arm64-arm-64bit-Mach-O",
+    "cpu": "arm"
+  },
+  "commit_hash": "85d01832fb7c42692bd0ddbcca5e3421d337dcbd",
+  "success": true,
+  "summary": {
+    "total": 5,
+    "passed": 4,
+    "failed": 0
+  },
+  "workflows": [
+    {
+      "name": "image_seg_point",
+      "status": "pass",
+      "duration_seconds": 70.03,
+      "error": null,
+      "hardware": {
+        "os": "macOS-15.7.4-arm64-arm-64bit-Mach-O",
+        "cpu": "arm"
+      },
+      "resources": {
+        "ram": {
+          "peak": 3.75,
+          "avg": 3.35
+        },
+        "total_ram_gb": 7.0,
+        "samples": 65
+      }
+    },
+    {
+      "name": "image_seg_text",
+      "status": "pass",
+      "duration_seconds": 57.98,
+      "error": null,
+      "hardware": {
+        "os": "macOS-15.7.4-arm64-arm-64bit-Mach-O",
+        "cpu": "arm"
+      },
+      "resources": {
+        "ram": {
+          "peak": 3.5,
+          "avg": 3.1
+        },
+        "total_ram_gb": 7.0,
+        "samples": 54
+      }
+    },
+    {
+      "name": "scene_seg",
+      "status": "pass",
+      "duration_seconds": 80.91,
+      "error": null,
+      "hardware": {
+        "os": "macOS-15.7.4-arm64-arm-64bit-Mach-O",
+        "cpu": "arm"
+      },
+      "resources": {
+        "ram": {
+          "peak": 3.46,
+          "avg": 2.97
+        },
+        "total_ram_gb": 7.0,
+        "samples": 75
+      }
+    },
+    {
+      "name": "scene_seg_interactive",
+      "status": "pass",
+      "duration_seconds": 56.0,
+      "error": null,
+      "hardware": {
+        "os": "macOS-15.7.4-arm64-arm-64bit-Mach-O",
+        "cpu": "arm"
+      },
+      "resources": {
+        "ram": {
+          "peak": 3.25,
+          "avg": 2.79
+        },
+        "total_ram_gb": 7.0,
+        "samples": 53
+      }
+    },
+    {
+      "name": "video_point_prompt",
+      "status": "skipped",
+      "duration_seconds": 0,
+      "error": "Not configured for CPU runner",
+      "hardware": null
+    }
+  ]
+}

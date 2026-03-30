@@ -1,0 +1,50 @@
+{
+  "frames": [
+    {
+      "file": "frame_000.jpg",
+      "time": 0.0,
+      "log": "Capturing execution frames: scene_seg_interactive.json"
+    },
+    {
+      "file": "frame_001.jpg",
+      "time": 2.32,
+      "log": "Capturing execution frames: scene_seg_interactive.json\n  Frame 1 saved (frame_000.jpg, t=0.0s)\n  Validating workflow...\n  Queuing workflow for execution..."
+    },
+    {
+      "file": "frame_002.jpg",
+      "time": 4.63,
+      "log": "Capturing execution frames: scene_seg_interactive.json\n  Frame 1 saved (frame_000.jpg, t=0.0s)\n  Validating workflow...\n  Queuing workflow for execution...\n  Frame 2 saved (frame_001.jpg, t=2.3s)\n  [capture-periodic] freeze=4ms shot=173ms unfreeze=5ms saved=True"
+    },
+    {
+      "file": "frame_003.jpg",
+      "time": 6.89,
+      "log": "Capturing execution frames: scene_seg_interactive.json\n  Frame 1 saved (frame_000.jpg, t=0.0s)\n  Validating workflow...\n  Queuing workflow for execution...\n  Frame 2 saved (frame_001.jpg, t=2.3s)\n  [capture-periodic] freeze=4ms shot=173ms unfreeze=5ms saved=True\n  Frame 3 saved (frame_002.jpg, t=4.6s)\n  [capture-periodic] freeze=4ms shot=188ms unfreeze=12ms saved=True\n  [capture-loop] iter=50 t=6.2s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=6"
+    },
+    {
+      "file": "frame_004.jpg",
+      "time": 68.59,
+      "log": "Capturing execution frames: scene_seg_interactive.json\n  Frame 1 saved (frame_000.jpg, t=0.0s)\n  Validating workflow...\n  Queuing workflow for execution...\n  Frame 2 saved (frame_001.jpg, t=2.3s)\n  [capture-periodic] freeze=4ms shot=173ms unfreeze=5ms saved=True\n  Frame 3 saved (frame_002.jpg, t=4.6s)\n  [capture-periodic] freeze=4ms shot=188ms unfreeze=12ms saved=True\n  [capture-loop] iter=50 t=6.2s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=6\n  Frame 4 saved (frame_003.jpg, t=6.9s)\n  [capture-periodic] freeze=16ms shot=215ms unfreeze=6ms saved=True\n  [capture-loop] iter=100 t=12.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=6\n  [capture-loop] iter=150 t=18.8s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=10\n  [capture-loop] iter=200 t=25.0s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=250 t=31.4s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=300 t=37.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=350 t=43.4s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=400 t=49.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=450 t=55.6s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=6\n  [capture-loop] iter=500 t=61.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=550 t=67.7s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5"
+    },
+    {
+      "file": "frame_005.jpg",
+      "time": 70.97,
+      "log": "Capturing execution frames: scene_seg_interactive.json\n  Frame 1 saved (frame_000.jpg, t=0.0s)\n  Validating workflow...\n  Queuing workflow for execution...\n  Frame 2 saved (frame_001.jpg, t=2.3s)\n  [capture-periodic] freeze=4ms shot=173ms unfreeze=5ms saved=True\n  Frame 3 saved (frame_002.jpg, t=4.6s)\n  [capture-periodic] freeze=4ms shot=188ms unfreeze=12ms saved=True\n  [capture-loop] iter=50 t=6.2s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=6\n  Frame 4 saved (frame_003.jpg, t=6.9s)\n  [capture-periodic] freeze=16ms shot=215ms unfreeze=6ms saved=True\n  [capture-loop] iter=100 t=12.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=6\n  [capture-loop] iter=150 t=18.8s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=10\n  [capture-loop] iter=200 t=25.0s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=250 t=31.4s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=300 t=37.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=350 t=43.4s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=400 t=49.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=450 t=55.6s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=6\n  [capture-loop] iter=500 t=61.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=550 t=67.7s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  Frame 5 saved (frame_004.jpg, t=68.6s)\n  [capture-periodic] freeze=5ms shot=217ms unfreeze=19ms saved=True"
+    },
+    {
+      "file": "frame_006.jpg",
+      "time": 74.18,
+      "log": "Capturing execution frames: scene_seg_interactive.json\n  Frame 1 saved (frame_000.jpg, t=0.0s)\n  Validating workflow...\n  Queuing workflow for execution...\n  Frame 2 saved (frame_001.jpg, t=2.3s)\n  [capture-periodic] freeze=4ms shot=173ms unfreeze=5ms saved=True\n  Frame 3 saved (frame_002.jpg, t=4.6s)\n  [capture-periodic] freeze=4ms shot=188ms unfreeze=12ms saved=True\n  [capture-loop] iter=50 t=6.2s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=6\n  Frame 4 saved (frame_003.jpg, t=6.9s)\n  [capture-periodic] freeze=16ms shot=215ms unfreeze=6ms saved=True\n  [capture-loop] iter=100 t=12.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=6\n  [capture-loop] iter=150 t=18.8s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=10\n  [capture-loop] iter=200 t=25.0s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=250 t=31.4s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=300 t=37.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=350 t=43.4s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=400 t=49.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=450 t=55.6s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=6\n  [capture-loop] iter=500 t=61.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=550 t=67.7s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  Frame 5 saved (frame_004.jpg, t=68.6s)\n  [capture-periodic] freeze=5ms shot=217ms unfreeze=19ms saved=True\n  Frame 6 saved (frame_005.jpg, t=71.0s)\n  [capture-periodic] freeze=5ms shot=211ms unfreeze=7ms saved=True"
+    },
+    {
+      "file": "frame_007.jpg",
+      "time": 75.18,
+      "log": "Capturing execution frames: scene_seg_interactive.json\n  Frame 1 saved (frame_000.jpg, t=0.0s)\n  Validating workflow...\n  Queuing workflow for execution...\n  Frame 2 saved (frame_001.jpg, t=2.3s)\n  [capture-periodic] freeze=4ms shot=173ms unfreeze=5ms saved=True\n  Frame 3 saved (frame_002.jpg, t=4.6s)\n  [capture-periodic] freeze=4ms shot=188ms unfreeze=12ms saved=True\n  [capture-loop] iter=50 t=6.2s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=6\n  Frame 4 saved (frame_003.jpg, t=6.9s)\n  [capture-periodic] freeze=16ms shot=215ms unfreeze=6ms saved=True\n  [capture-loop] iter=100 t=12.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=6\n  [capture-loop] iter=150 t=18.8s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=10\n  [capture-loop] iter=200 t=25.0s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=250 t=31.4s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=300 t=37.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=350 t=43.4s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=400 t=49.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=450 t=55.6s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=6\n  [capture-loop] iter=500 t=61.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  [capture-loop] iter=550 t=67.7s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5\n  Frame 5 saved (frame_004.jpg, t=68.6s)\n  [capture-periodic] freeze=5ms shot=217ms unfreeze=19ms saved=True\n  Frame 6 saved (frame_005.jpg, t=71.0s)\n  [capture-periodic] freeze=5ms shot=211ms unfreeze=7ms saved=True\n  Node executed (1 total), capturing...\n  Frame 7 saved (frame_006.jpg, t=74.2s)\n  [capture-node] freeze=50ms shot=644ms unfreeze=14ms saved=True"
+    },
+    {
+      "file": "frame_008.jpg",
+      "time": 78.79012656211853,
+      "log": "Final screenshot"
+    }
+  ],
+  "total_time": 75.44
+}

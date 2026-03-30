@@ -1,0 +1,56 @@
+Capturing execution frames: scene_seg.json
+  Frame 1 saved (frame_000.jpg, t=0.0s)
+  Validating workflow...
+  Queuing workflow for execution...
+  Frame 2 saved (frame_001.jpg, t=2.4s)
+  [capture-periodic] freeze=4ms shot=162ms unfreeze=5ms saved=True
+  Frame 3 saved (frame_002.jpg, t=4.6s)
+  [capture-periodic] freeze=3ms shot=160ms unfreeze=3ms saved=True
+  [capture-loop] iter=50 t=6.0s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=4
+  Frame 4 saved (frame_003.jpg, t=6.8s)
+  [capture-periodic] freeze=3ms shot=163ms unfreeze=9ms saved=True
+  Node executed (1 total), capturing...
+  Frame 5 saved (frame_004.jpg, t=7.8s)
+  [capture-node] freeze=14ms shot=346ms unfreeze=3ms saved=True
+  Frame 6 saved (frame_005.jpg, t=10.3s)
+  [capture-periodic] freeze=4ms shot=194ms unfreeze=24ms saved=True
+  [capture-loop] iter=100 t=12.6s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=5
+  [capture-loop] iter=150 t=18.9s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=4
+  [capture-loop] iter=200 t=25.1s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=5
+  [capture-loop] iter=250 t=31.0s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=5
+  [capture-loop] iter=300 t=37.2s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=5
+  [capture-loop] iter=350 t=43.3s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=4
+  [capture-loop] iter=400 t=49.2s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=4
+  [capture-loop] iter=450 t=55.2s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=4
+  [capture-loop] iter=500 t=61.3s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=4
+  [capture-loop] iter=550 t=67.2s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=5
+  [capture-loop] iter=600 t=73.4s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=4
+  Frame 7 saved (frame_006.jpg, t=74.6s)
+  [capture-periodic] freeze=16ms shot=273ms unfreeze=10ms saved=True
+  Frame 8 saved (frame_007.jpg, t=77.0s)
+  [capture-periodic] freeze=5ms shot=279ms unfreeze=15ms saved=True
+  Frame 9 saved (frame_008.jpg, t=79.4s)
+  [capture-periodic] freeze=4ms shot=239ms unfreeze=35ms saved=True
+  [capture-loop] iter=650 t=80.0s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=4
+  [capture-loop] iter=700 t=85.9s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=4
+  Frame 10 saved (frame_009.jpg, t=86.5s)
+  [capture-periodic] freeze=13ms shot=200ms unfreeze=13ms saved=True
+  Node executed (2 total), capturing...
+  Frame 11 saved (frame_010.jpg, t=88.5s)
+  [capture-node] freeze=19ms shot=923ms unfreeze=18ms saved=True
+  Frame 12 saved (frame_011.jpg, t=91.5s)
+  [capture-periodic] freeze=3ms shot=208ms unfreeze=22ms saved=True
+  [capture-loop] iter=750 t=93.0s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=3
+  Node executed (3 total), capturing...
+  Frame 13 saved (frame_012.jpg, t=94.7s)
+  [capture-node] freeze=4ms shot=218ms unfreeze=3ms saved=True
+  Node executed (4 total), capturing...
+  Frame 14 saved (frame_013.jpg, t=95.5s)
+  [capture-node] freeze=16ms shot=422ms unfreeze=0ms saved=True
+  Execution complete (t=95.5s)
+  Captured 14 unique frames over 96.53s
+  [debug] iframes: 0
+  [timing] trigger_3d_previews: 0.0s
+  Saved high-quality screenshot: scene_seg_executed.png
+  [timing] final_screenshot: 1.9s
+    Captured 15 video frames

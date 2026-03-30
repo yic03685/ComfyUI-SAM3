@@ -1,0 +1,37 @@
+Capturing execution frames: image_seg_point.json
+  Frame 1 saved (frame_000.jpg, t=0.0s)
+  Validating workflow...
+  Queuing workflow for execution...
+  Frame 2 saved (frame_001.jpg, t=2.3s)
+  [capture-periodic] freeze=4ms shot=142ms unfreeze=4ms saved=True
+  Node executed (1 total), capturing...
+  Frame 3 saved (frame_002.jpg, t=3.0s)
+  [capture-node] freeze=4ms shot=154ms unfreeze=4ms saved=True
+  Frame 4 saved (frame_003.jpg, t=5.3s)
+  [capture-periodic] freeze=6ms shot=236ms unfreeze=20ms saved=True
+  [capture-loop] iter=50 t=6.8s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=11
+  Frame 5 saved (frame_004.jpg, t=7.6s)
+  [capture-periodic] freeze=16ms shot=580ms unfreeze=124ms saved=True
+  Frame 6 saved (frame_005.jpg, t=13.6s)
+  [capture-periodic] freeze=3ms shot=199ms unfreeze=47ms saved=True
+  [capture-loop] iter=100 t=14.6s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=4
+  [capture-loop] iter=150 t=20.3s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=5
+  [capture-loop] iter=200 t=26.5s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=4
+  [capture-loop] iter=250 t=32.5s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=4
+  [capture-loop] iter=300 t=38.3s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=5
+  [capture-loop] iter=350 t=44.3s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=4
+  [capture-loop] iter=400 t=50.3s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=4
+  [capture-loop] iter=450 t=56.1s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=4
+  Node executed (2 total), capturing...
+  Frame 7 saved (frame_006.jpg, t=57.7s)
+  [capture-node] freeze=4ms shot=137ms unfreeze=3ms saved=True
+  Node executed (3 total), capturing...
+  Frame 8 saved (frame_007.jpg, t=58.2s)
+  [capture-node] freeze=3ms shot=133ms unfreeze=0ms saved=True
+  Execution complete (t=58.2s)
+  Captured 8 unique frames over 58.35s
+  [debug] iframes: 0
+  [timing] trigger_3d_previews: 0.0s
+  Saved high-quality screenshot: image_seg_point_executed.png
+  [timing] final_screenshot: 1.0s
+    Captured 9 video frames

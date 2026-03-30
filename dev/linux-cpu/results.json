@@ -1,0 +1,96 @@
+{
+  "timestamp": "2026-03-30T20:25:47.789205+00:00",
+  "platform": "linux",
+  "hardware": {
+    "os": "Linux-6.17.0-1008-azure-x86_64-with-glibc2.39",
+    "cpu": "AMD EPYC 7763 64-Core Processor"
+  },
+  "commit_hash": "85d01832fb7c42692bd0ddbcca5e3421d337dcbd",
+  "success": true,
+  "summary": {
+    "total": 5,
+    "passed": 4,
+    "failed": 0
+  },
+  "workflows": [
+    {
+      "name": "image_seg_point",
+      "status": "pass",
+      "duration_seconds": 67.7,
+      "error": null,
+      "hardware": {
+        "os": "Linux-6.17.0-1008-azure-x86_64-with-glibc2.39",
+        "cpu": "AMD EPYC 7763 64-Core Processor"
+      },
+      "resources": {
+        "ram": {
+          "peak": 4.96,
+          "avg": 2.96
+        },
+        "total_ram_gb": 15.6,
+        "samples": 68
+      }
+    },
+    {
+      "name": "image_seg_text",
+      "status": "pass",
+      "duration_seconds": 59.21,
+      "error": null,
+      "hardware": {
+        "os": "Linux-6.17.0-1008-azure-x86_64-with-glibc2.39",
+        "cpu": "AMD EPYC 7763 64-Core Processor"
+      },
+      "resources": {
+        "ram": {
+          "peak": 5.21,
+          "avg": 3.01
+        },
+        "total_ram_gb": 15.6,
+        "samples": 60
+      }
+    },
+    {
+      "name": "scene_seg",
+      "status": "pass",
+      "duration_seconds": 67.22,
+      "error": null,
+      "hardware": {
+        "os": "Linux-6.17.0-1008-azure-x86_64-with-glibc2.39",
+        "cpu": "AMD EPYC 7763 64-Core Processor"
+      },
+      "resources": {
+        "ram": {
+          "peak": 6.41,
+          "avg": 4.18
+        },
+        "total_ram_gb": 15.6,
+        "samples": 68
+      }
+    },
+    {
+      "name": "scene_seg_interactive",
+      "status": "pass",
+      "duration_seconds": 56.94,
+      "error": null,
+      "hardware": {
+        "os": "Linux-6.17.0-1008-azure-x86_64-with-glibc2.39",
+        "cpu": "AMD EPYC 7763 64-Core Processor"
+      },
+      "resources": {
+        "ram": {
+          "peak": 6.09,
+          "avg": 3.89
+        },
+        "total_ram_gb": 15.6,
+        "samples": 57
+      }
+    },
+    {
+      "name": "video_point_prompt",
+      "status": "skipped",
+      "duration_seconds": 0,
+      "error": "Not configured for CPU runner",
+      "hardware": null
+    }
+  ]
+}

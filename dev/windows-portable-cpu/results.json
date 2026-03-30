@@ -1,0 +1,96 @@
+{
+  "timestamp": "2026-03-30T20:27:04.282379+00:00",
+  "platform": "windows_portable",
+  "hardware": {
+    "os": "Windows-2025Server-10.0.26100-SP0",
+    "cpu": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD"
+  },
+  "commit_hash": "85d01832fb7c42692bd0ddbcca5e3421d337dcbd",
+  "success": true,
+  "summary": {
+    "total": 5,
+    "passed": 4,
+    "failed": 0
+  },
+  "workflows": [
+    {
+      "name": "image_seg_point",
+      "status": "pass",
+      "duration_seconds": 106.36,
+      "error": null,
+      "hardware": {
+        "os": "Windows-2025Server-10.0.26100-SP0",
+        "cpu": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD"
+      },
+      "resources": {
+        "ram": {
+          "peak": 9.03,
+          "avg": 6.8
+        },
+        "total_ram_gb": 16.0,
+        "samples": 106
+      }
+    },
+    {
+      "name": "image_seg_text",
+      "status": "pass",
+      "duration_seconds": 80.82,
+      "error": null,
+      "hardware": {
+        "os": "Windows-2025Server-10.0.26100-SP0",
+        "cpu": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD"
+      },
+      "resources": {
+        "ram": {
+          "peak": 9.44,
+          "avg": 7.85
+        },
+        "total_ram_gb": 16.0,
+        "samples": 81
+      }
+    },
+    {
+      "name": "scene_seg",
+      "status": "pass",
+      "duration_seconds": 106.2,
+      "error": null,
+      "hardware": {
+        "os": "Windows-2025Server-10.0.26100-SP0",
+        "cpu": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD"
+      },
+      "resources": {
+        "ram": {
+          "peak": 11.17,
+          "avg": 8.25
+        },
+        "total_ram_gb": 16.0,
+        "samples": 107
+      }
+    },
+    {
+      "name": "scene_seg_interactive",
+      "status": "pass",
+      "duration_seconds": 80.62,
+      "error": null,
+      "hardware": {
+        "os": "Windows-2025Server-10.0.26100-SP0",
+        "cpu": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD"
+      },
+      "resources": {
+        "ram": {
+          "peak": 10.75,
+          "avg": 8.68
+        },
+        "total_ram_gb": 16.0,
+        "samples": 81
+      }
+    },
+    {
+      "name": "video_point_prompt",
+      "status": "skipped",
+      "duration_seconds": 0,
+      "error": "Not configured for CPU runner",
+      "hardware": null
+    }
+  ]
+}
