@@ -859,6 +859,67 @@ class SAM3MultipromptSegmentation(io.ComfyNode):
         return io.NodeOutput(comfy_masks, vis_tensor)
 
 
+class SAM3TextPoints(io.ComfyNode):
+    """
+    Create point prompts from text input directly.
+
+    Enter points as text, one per line: x,y,label
+    - x,y are normalized coordinates (0.0 to 1.0)
+    - label is 1 for foreground, 0 for background
+    Example: 0.5,0.3,1
+             0.2,0.8,0
+    """
+
+    @classmethod
+    def define_schema(cls):
+        return io.Schema(
+            node_id="SAM3TextPoints",
+            display_name="SAM3 Text Points",
+            category="SAM3/prompts",
+            inputs=[
+                io.String.Input("points_text", multiline=True,
+                                default="0.5,0.5,1",
+                                tooltip="Points as text, one per line: x,y,label. "
+                                        "x,y are normalized 0-1. label: 1=foreground, 0=background. "
+                                        "Example:\n0.5,0.3,1\n0.2,0.8,0"),
+            ],
+            outputs=[
+                io.Custom("SAM3_POINTS_PROMPT").Output(display_name="points_prompt"),
+            ],
+        )
+
+    @classmethod
+    def execute(cls, points_text):
+        """Parse text input into point prompts"""
+        points = []
+        labels = []
+
+        for line in points_text.strip().splitlines():
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            parts = [p.strip() for p in line.split(",")]
+            if len(parts) < 2:
+                continue
+            x = float(parts[0])
+            y = float(parts[1])
+            label = int(parts[2]) if len(parts) >= 3 else 1
+            x = max(0.0, min(1.0, x))
+            y = max(0.0, min(1.0, y))
+            label = 1 if label != 0 else 0
+            points.append([x, y])
+            labels.append(label)
+
+        if not points:
+            raise ValueError("No valid points found in text input. Use format: x,y,label (one per line)")
+
+        combined = {
+            "points": points,
+            "labels": labels
+        }
+        return io.NodeOutput(combined)
+
+
 # Register the nodes
 NODE_CLASS_MAPPINGS = {
     "SAM3Grounding": SAM3Grounding,
@@ -868,6 +929,7 @@ NODE_CLASS_MAPPINGS = {
     "SAM3CreatePoint": SAM3CreatePoint,
     "SAM3CombineBoxes": SAM3CombineBoxes,
     "SAM3CombinePoints": SAM3CombinePoints,
+    "SAM3TextPoints": SAM3TextPoints,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -878,4 +940,5 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "SAM3CreatePoint": "SAM3 Create Point",
     "SAM3CombineBoxes": "SAM3 Combine Boxes",
     "SAM3CombinePoints": "SAM3 Combine Points",
+    "SAM3TextPoints": "SAM3 Text Points",
 }
