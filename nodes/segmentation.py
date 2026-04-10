@@ -920,6 +920,75 @@ class SAM3TextPoints(io.ComfyNode):
         return io.NodeOutput(combined)
 
 
+class SAM3GroundingToBox(io.ComfyNode):
+    """
+    Convert SAM3Grounding box output to a SAM3_BOXES_PROMPT that can connect to SAM3Segmentation.
+
+    This bridges text-based detection with point-based segmentation:
+      1. SAM3Grounding detects objects by text → outputs boxes (JSON string)
+      2. This node converts the best detection box → SAM3_BOXES_PROMPT
+      3. SAM3Segmentation uses the box + your points for precise segmentation
+
+    The box constrains the segmentation region so points refine within
+    the text-detected area.
+    """
+
+    @classmethod
+    def define_schema(cls):
+        return io.Schema(
+            node_id="SAM3GroundingToBox",
+            display_name="SAM3 Grounding → Box Prompt",
+            category="SAM3/prompts",
+            inputs=[
+                io.String.Input("boxes_json",
+                                tooltip="Connect the 'boxes' output from SAM3Grounding"),
+                io.Image.Input("image",
+                               tooltip="Same image used in SAM3Grounding (needed for coordinate normalization)"),
+                io.Int.Input("detection_index", default=0, min=0, max=99, optional=True,
+                             tooltip="Which detection to use (0 = highest score). Detections are sorted by confidence."),
+            ],
+            outputs=[
+                io.Custom("SAM3_BOXES_PROMPT").Output(display_name="box_prompt"),
+            ],
+        )
+
+    @classmethod
+    def execute(cls, boxes_json, image, detection_index=0):
+        """Convert grounding boxes JSON to SAM3_BOXES_PROMPT format."""
+        import json
+
+        pil_image = comfy_image_to_pil(image)
+        img_w, img_h = pil_image.size
+
+        boxes_list = json.loads(boxes_json) if boxes_json.strip() else []
+        if not boxes_list:
+            log.warning("No detection boxes to convert")
+            return io.NodeOutput({"boxes": [], "labels": []})
+
+        if detection_index >= len(boxes_list):
+            log.warning(f"detection_index {detection_index} >= {len(boxes_list)} detections, using last")
+            detection_index = len(boxes_list) - 1
+
+        # Grounding outputs [x1, y1, x2, y2] in pixel coordinates
+        box = boxes_list[detection_index]
+        x1, y1, x2, y2 = box[0], box[1], box[2], box[3]
+
+        # Convert to normalized center format [cx, cy, w, h] in [0, 1]
+        cx = ((x1 + x2) / 2.0) / img_w
+        cy = ((y1 + y2) / 2.0) / img_h
+        w = abs(x2 - x1) / img_w
+        h = abs(y2 - y1) / img_h
+
+        log.info(f"Converted detection {detection_index}: pixel [{x1:.0f},{y1:.0f},{x2:.0f},{y2:.0f}] → "
+                 f"normalized center [{cx:.3f},{cy:.3f},{w:.3f},{h:.3f}]")
+
+        combined = {
+            "boxes": [[cx, cy, w, h]],
+            "labels": [True],  # positive box
+        }
+        return io.NodeOutput(combined)
+
+
 # Register the nodes
 NODE_CLASS_MAPPINGS = {
     "SAM3Grounding": SAM3Grounding,
@@ -930,6 +999,7 @@ NODE_CLASS_MAPPINGS = {
     "SAM3CombineBoxes": SAM3CombineBoxes,
     "SAM3CombinePoints": SAM3CombinePoints,
     "SAM3TextPoints": SAM3TextPoints,
+    "SAM3GroundingToBox": SAM3GroundingToBox,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -941,4 +1011,5 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "SAM3CombineBoxes": "SAM3 Combine Boxes",
     "SAM3CombinePoints": "SAM3 Combine Points",
     "SAM3TextPoints": "SAM3 Text Points",
+    "SAM3GroundingToBox": "SAM3 Grounding → Box Prompt",
 }
