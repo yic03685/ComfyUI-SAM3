@@ -944,8 +944,12 @@ class SAM3GroundingToBox(io.ComfyNode):
                                 tooltip="Connect the 'boxes' output from SAM3Grounding"),
                 io.Image.Input("image",
                                tooltip="Same image used in SAM3Grounding (needed for coordinate normalization)"),
+                io.Custom("SAM3_POINTS_PROMPT").Input("positive_points", optional=True,
+                                                      tooltip="Auto-selects the detection box containing the most positive points. "
+                                                              "Connect the same points you feed to SAM3Segmentation."),
                 io.Int.Input("detection_index", default=0, min=0, max=99, optional=True,
-                             tooltip="Which detection to use (0 = highest score). Detections are sorted by confidence."),
+                             tooltip="Which detection to use (0 = highest score). "
+                                     "Ignored when positive_points are connected."),
             ],
             outputs=[
                 io.Custom("SAM3_BOXES_PROMPT").Output(display_name="box_prompt"),
@@ -953,7 +957,7 @@ class SAM3GroundingToBox(io.ComfyNode):
         )
 
     @classmethod
-    def execute(cls, boxes_json, image, detection_index=0):
+    def execute(cls, boxes_json, image, positive_points=None, detection_index=0):
         """Convert grounding boxes JSON to SAM3_BOXES_PROMPT format."""
         import json
 
@@ -965,12 +969,31 @@ class SAM3GroundingToBox(io.ComfyNode):
             log.warning("No detection boxes to convert")
             return io.NodeOutput({"boxes": [], "labels": []})
 
-        if detection_index >= len(boxes_list):
-            log.warning(f"detection_index {detection_index} >= {len(boxes_list)} detections, using last")
-            detection_index = len(boxes_list) - 1
+        # Auto-detect from positive points if provided
+        chosen_index = detection_index
+        if positive_points is not None and len(positive_points.get('points', [])) > 0:
+            pts = positive_points['points']
+            best_idx = 0
+            best_count = -1
+
+            for i, box in enumerate(boxes_list):
+                x1, y1, x2, y2 = box[0], box[1], box[2], box[3]
+                nx1, ny1 = x1 / img_w, y1 / img_h
+                nx2, ny2 = x2 / img_w, y2 / img_h
+                count = sum(1 for pt in pts if nx1 <= pt[0] <= nx2 and ny1 <= pt[1] <= ny2)
+                if count > best_count:
+                    best_count = count
+                    best_idx = i
+
+            log.info(f"Auto-detected box {best_idx} (contains {best_count}/{len(pts)} positive points)")
+            chosen_index = best_idx
+        else:
+            if chosen_index >= len(boxes_list):
+                log.warning(f"detection_index {chosen_index} >= {len(boxes_list)} detections, using last")
+                chosen_index = len(boxes_list) - 1
 
         # Grounding outputs [x1, y1, x2, y2] in pixel coordinates
-        box = boxes_list[detection_index]
+        box = boxes_list[chosen_index]
         x1, y1, x2, y2 = box[0], box[1], box[2], box[3]
 
         # Convert to normalized center format [cx, cy, w, h] in [0, 1]
@@ -979,7 +1002,7 @@ class SAM3GroundingToBox(io.ComfyNode):
         w = abs(x2 - x1) / img_w
         h = abs(y2 - y1) / img_h
 
-        log.info(f"Converted detection {detection_index}: pixel [{x1:.0f},{y1:.0f},{x2:.0f},{y2:.0f}] → "
+        log.info(f"Selected detection {chosen_index}: pixel [{x1:.0f},{y1:.0f},{x2:.0f},{y2:.0f}] → "
                  f"normalized center [{cx:.3f},{cy:.3f},{w:.3f},{h:.3f}]")
 
         combined = {
