@@ -943,10 +943,13 @@ class SAM3GroundingToBox(io.ComfyNode):
                 io.Image.Input("image",
                                tooltip="Same image used in SAM3Grounding (needed for coordinate normalization)"),
                 io.Custom("SAM3_POINTS_PROMPT").Input("positive_points", optional=True,
-                                                      tooltip="If provided, auto-selects the detection box containing the most positive points. "
+                                                      tooltip="Auto-selects the detection box containing the most positive points. "
+                                                              "Connect the same points you feed to SAM3Segmentation."),
+                io.Custom("SAM3_POINTS_PROMPT").Input("negative_points", optional=True,
+                                                      tooltip="Boxes containing negative points are penalized during auto-detection. "
                                                               "Connect the same points you feed to SAM3Segmentation."),
                 io.Int.Input("detection_index", default=0, min=-1, max=99, optional=True,
-                             tooltip="Which detection to use (0 = highest score). Set -1 to force auto-detect from points. "
+                             tooltip="Which detection to use (0 = highest score). "
                                      "Ignored when positive_points are connected."),
             ],
             outputs=[
@@ -955,11 +958,12 @@ class SAM3GroundingToBox(io.ComfyNode):
         )
 
     @classmethod
-    def execute(cls, boxes_json, image, positive_points=None, detection_index=0):
+    def execute(cls, boxes_json, image, positive_points=None, negative_points=None, detection_index=0):
         """Convert grounding boxes JSON to SAM3_BOXES_PROMPT format.
 
         If positive_points are provided, automatically selects the detection box
-        that contains the most points. Otherwise uses detection_index.
+        with the best score (most positive points inside, fewest negative points inside).
+        Otherwise uses detection_index.
         """
         import json
 
@@ -971,29 +975,35 @@ class SAM3GroundingToBox(io.ComfyNode):
             log.warning("No detection boxes to convert")
             return io.NodeOutput({"boxes": [], "labels": []})
 
-        # Auto-detect: find the box containing the most positive points
+        # Auto-detect: find the box with best score from points
         chosen_index = detection_index
-        if positive_points is not None and len(positive_points.get('points', [])) > 0:
-            pts = positive_points['points']  # normalized [0,1]
+        has_pos = positive_points is not None and len(positive_points.get('points', [])) > 0
+        has_neg = negative_points is not None and len(negative_points.get('points', [])) > 0
+
+        if has_pos or has_neg:
+            pos_pts = positive_points['points'] if has_pos else []
+            neg_pts = negative_points['points'] if has_neg else []
             best_idx = 0
-            best_count = -1
+            best_score = -999
 
             for i, box in enumerate(boxes_list):
                 x1, y1, x2, y2 = box[0], box[1], box[2], box[3]
-                # Normalize box to [0,1]
                 nx1, ny1 = x1 / img_w, y1 / img_h
                 nx2, ny2 = x2 / img_w, y2 / img_h
-                # Count how many points fall inside this box
-                count = 0
-                for pt in pts:
-                    px, py = pt[0], pt[1]
-                    if nx1 <= px <= nx2 and ny1 <= py <= ny2:
-                        count += 1
-                if count > best_count:
-                    best_count = count
+
+                def _inside(pt):
+                    return nx1 <= pt[0] <= nx2 and ny1 <= pt[1] <= ny2
+
+                pos_count = sum(1 for pt in pos_pts if _inside(pt))
+                neg_count = sum(1 for pt in neg_pts if _inside(pt))
+                score = pos_count - neg_count
+
+                log.info(f"  Box {i}: +{pos_count} -{neg_count} = score {score}")
+                if score > best_score:
+                    best_score = score
                     best_idx = i
 
-            log.info(f"Auto-detected box {best_idx} (contains {best_count}/{len(pts)} positive points)")
+            log.info(f"Auto-detected box {best_idx} (score {best_score})")
             chosen_index = best_idx
         else:
             if chosen_index < 0:
